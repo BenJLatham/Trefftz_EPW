@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Trefftz-EPW-2D"
+version = "0.1.0"
+description = "Plane-wave DG solver for 2D disk scattering"
+authors = [{name="Ben Latham", email="blatham@ucmerced.edu"}]
+readme = "README.md"
+license = {text = "MIT"}
+dependencies = [
+  "numpy",
+  "scipy",
+  "meshio",
+  "gmsh",
+  "pypardiso",
+  "joblib"
+]
+
+[tool.black]
+line-length = 88
+
+[tool.flake8]
+max-line-length = 88
+ignore = ["E203", "W503"]
+exclude = ["build", "dist", "__pycache__"]

@@ -1,0 +1,84 @@
+# Byte‐compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.env/
+.venv/
+venv/
+ENV/
+env/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Pytest
+.pytest_cache/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Sphinx build
+docs/_build/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Rope
+.ropeproject
+
+# Coverage
+.coverage
+.coverage.*
+
+# Profiling
+profiler_output/
+
+# Temporary files
+*.tmp
+*.swp
+*~
