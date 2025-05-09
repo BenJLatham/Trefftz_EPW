@@ -1,4 +1,3 @@
-import numpy as np
 import math
 from Trefftz_EPW_2D.pw_utils import build_pw_params
 

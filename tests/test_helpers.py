@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 from Trefftz_EPW_2D.helpers import complex_sqrt, psi
 
 

@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 from Trefftz_EPW_2D.solver import solve_system
 from scipy.sparse import identity
 

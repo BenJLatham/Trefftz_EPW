@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 from Trefftz_EPW_2D.assembly import assemble_system
 
 
