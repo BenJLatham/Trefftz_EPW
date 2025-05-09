@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Trefftz-EPW-2D"
-version = "0.1.0"
+version = "0.1.1"
 description = "Plane-wave DG solver for 2D disk scattering"
 authors = [{name="Ben Latham", email="blatham@ucmerced.edu"}]
 readme = "README.md"
