@@ -17,6 +17,8 @@ dependencies = [
   "pypardiso",
   "joblib"
 ]
+[project.scripts]
+trefftzdg = "Trefftz_EPW_2D.core:main"
 
 [tool.black]
 line-length = 88

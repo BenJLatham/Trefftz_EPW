@@ -194,3 +194,77 @@ class Trefftz2d:
         Return quadrature points and weights for reference triangle.
         """
         return gaussian_quadrature_points_and_weights(n)
+    
+    
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        prog="trefftzdg",
+        description="Run the 2D plane-wave DG Trefftz solver"
+    )
+    # core solver parameters
+    parser.add_argument("--k", type=float, required=True,
+                        help="Wavenumber in exterior medium")
+    parser.add_argument("--epsilon", type=float, required=True,
+                        help="Relative permittivity of inclusion")
+    parser.add_argument("--order", type=int, required=True,
+                        help="Target number of plane waves per element")
+    parser.add_argument("--zeta-distribution", choices=["None","Interface","Parolin"],
+                        default="None", help="Evanescent mode distribution")
+    parser.add_argument("--bc", choices=["robin","dirichlet"], default="robin",
+                        help="Boundary condition type")
+    # mesh parameters
+    parser.add_argument("--mesh", choices=["disk","square"], default="disk",
+                        help="Mesh shape")
+    parser.add_argument("--h", type=float, required=True,
+                        help="Mesh size parameter")
+    parser.add_argument("--R", type=float, default=1.0,
+                        help="Radius for disk mesh")
+    parser.add_argument("--L", type=float,
+                        help="Side length for square mesh (required if mesh=square)")
+    # solver options
+    parser.add_argument("--use-pardiso", action="store_true",
+                        help="Use Pardiso solver instead of SciPy")
+    parser.add_argument("--alpha", type=float, default=None,
+                        help="Tikhonov regularization parameter")
+    # output
+    parser.add_argument("--output", type=str, default=None,
+                        help="Path to save solution vector (NumPy .npz)")
+
+    args = parser.parse_args()
+
+    # Build the solver
+    solver = Trefftz2d(
+        k=args.k,
+        epsilon=args.epsilon,
+        order=args.order,
+        zeta_distribution=args.zeta_distribution,
+        alpha=lambda x,y: args.alpha or 0.5,
+        beta=lambda  x,y: args.alpha or 0.5,
+        delta=lambda x,y: args.alpha or 0.5,
+        bc=args.bc
+    )
+
+    # Mesh
+    if args.mesh == "disk":
+        solver.meshing(h=args.h, R=args.R)
+    else:
+        if args.L is None:
+            parser.error("--L is required for square mesh")
+        solver.meshing(h=args.h, R=args.R, L=args.L)
+
+    # Build basis, assemble, and solve
+    solver.create_basis_functions()
+    solver.assemble()
+    solution = solver.solve(use_pardiso=args.use_pardiso, alpha=args.alpha)
+
+    # Output
+    if args.output:
+        import numpy as _np
+        _np.savez(args.output, solution=solution)
+        print(f"Solution saved to {args.output}")
+    else:
+        # Just print a summary
+        print("Solution vector (first 10 entries):", solution[:10])
+        print("Norm of solution:", np.linalg.norm(solution))
