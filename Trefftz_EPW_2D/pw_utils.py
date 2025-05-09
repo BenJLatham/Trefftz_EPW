@@ -17,7 +17,8 @@ __all__ = ["generate_plane_waves_from_dist", "build_pw_params"]
 
 def generate_plane_waves_from_dist(R, k, N, xc=0, yc=0, troubleshoot_zeta=0, offset=0):
     """
-    Generate plane waves centered at (xc, yc) and corresponding phi and zeta values, including their gradients.
+    Generate plane waves centered at (xc, yc)
+    and corresponding phi and zeta values, including their gradients.
 
     Parameters:
       R                : float
@@ -40,7 +41,8 @@ def generate_plane_waves_from_dist(R, k, N, xc=0, yc=0, troubleshoot_zeta=0, off
 
     Returns:
       plane_wave_functions : list of tuples
-                            Each tuple (plane_wave, plane_wave_grad) where both are callables.
+                            Each tuple (plane_wave, plane_wave_grad)
+                              where both are callables.
       phi_values          : ndarray
                             Array of direction angles.
       zeta_values         : ndarray
@@ -186,12 +188,13 @@ def build_pw_params(
     cx: float, cy: float, P_elem: int, eps_val: float, zmode: int, k: float
 ):
     """
-    Cached generation of plane-wave direction (theta) and evanescence (zeta) lists.
+    Cached generation of plane-wave direction (theta)
+    and decay (zeta) lists.
 
     Parameters:
       cx, cy : float  – element center coordinates
       P_elem : int    – number of plane waves per element
-      eps_val: float  – permittivity value for computing k inside
+      eps_val: float  – permittivity value
       zmode  : int    – troubleshoot_zeta mode
       k      : float  – base wave number
 

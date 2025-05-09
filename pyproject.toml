@@ -21,9 +21,9 @@ dependencies = [
 trefftzdg = "Trefftz_EPW_2D.core:main"
 
 [tool.black]
-line-length = 88
+line-length = 100
 
 [tool.flake8]
-max-line-length = 88
+max-line-length = 100
 ignore = ["E203", "W503"]
 exclude = ["build", "dist", "__pycache__"]

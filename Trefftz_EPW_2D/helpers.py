@@ -1,7 +1,8 @@
 """
 helpers.py
 
-Miscellaneous helper functions: complex-valued sqrt with correct casting and a stable psi(z) = (exp(z)-1)/z implementation.
+Miscellaneous helper functions: complex-valued sqrt with
+correct casting and a stable psi(z) = (exp(z)-1)/z implementation.
 """
 
 import numpy as np

@@ -4,7 +4,8 @@ from Trefftz_EPW_2D.quadrature import gaussian_quadrature_points_and_weights
 
 
 def test_supported_rules_sum_weights():
-    # For each supported n, weights should sum to 0.5 (area of ref triangle) :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
+    # For each supported n,
+    # weights should sum to 0.5 (area of ref triangle)
     for n in [1, 3, 4, 6, 13]:
         pts, w = gaussian_quadrature_points_and_weights(n)
         assert isinstance(pts, np.ndarray)
