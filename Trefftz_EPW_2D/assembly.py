@@ -55,10 +55,7 @@ def compute_raw_diag(
     sqrt_eps = complex_sqrt(eps)
     norm_coeff = D_mats[elem]["normalization_coeff"]
     PRI = (
-        norm_coeff
-        * np.exp(1j * k * sqrt_eps * dot_rc)
-        * jac
-        * psi(1j * k * sqrt_eps * dot_ba)
+        norm_coeff * np.exp(1j * k * sqrt_eps * dot_rc) * jac * psi(1j * k * sqrt_eps * dot_ba)
     )  # (P,P)
 
     # normal‐derivatives of the basis
@@ -70,24 +67,14 @@ def compute_raw_diag(
         t1 = (1 - δ) * 1j * k * PRI
         t2 = δ * PRI * norm_deriv[None, :]
         t3 = (δ - 1) * PRI * np.conj(norm_deriv)[:, None]
-        t4 = (
-            -δ
-            * (eps_inv / (1j * k))
-            * (np.conj(norm_deriv)[:, None] * norm_deriv[None, :])
-            * PRI
-        )
+        t4 = -δ * (eps_inv / (1j * k)) * (np.conj(norm_deriv)[:, None] * norm_deriv[None, :]) * PRI
         return t1 + t2 + t3 + t4
     # 3) interior face
     else:
         α = alpha(0, 0)
         β = beta(0, 0)
         A = -α * 1j * k * PRI
-        B = (
-            eps_inv**2
-            * (β / (1j * k))
-            * (np.conj(norm_deriv)[:, None] * norm_deriv[None, :])
-            * PRI
-        )
+        B = eps_inv**2 * (β / (1j * k)) * (np.conj(norm_deriv)[:, None] * norm_deriv[None, :]) * PRI
         T1 = -0.5 * eps_inv * PRI * np.conj(norm_deriv)[:, None]
         T2 = 0.5 * eps_inv * PRI * norm_deriv[None, :]
         return A + B + T1 + T2

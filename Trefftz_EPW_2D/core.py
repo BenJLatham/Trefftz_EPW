@@ -94,9 +94,7 @@ class Trefftz2d:
         self.mesh = meshio.read(filename or f"{mesh_type}.msh")
         # extract connectivity and geometry
         self.lines = make_lines(self.mesh)
-        self.centroids = np.mean(
-            self.mesh.points[self.mesh.cells_dict["triangle"]], axis=1
-        )
+        self.centroids = np.mean(self.mesh.points[self.mesh.cells_dict["triangle"]], axis=1)
         # set permittivity arrays per element
         N = len(self.centroids)
         self.epsilon_values = np.full(N, self.epsilon)
@@ -203,9 +201,7 @@ if __name__ == "__main__":
         prog="trefftzdg", description="Run the 2D plane-wave DG Trefftz solver"
     )
     # core solver parameters
-    parser.add_argument(
-        "--k", type=float, required=True, help="Wavenumber in exterior medium"
-    )
+    parser.add_argument("--k", type=float, required=True, help="Wavenumber in exterior medium")
     parser.add_argument(
         "--epsilon",
         type=float,
@@ -231,9 +227,7 @@ if __name__ == "__main__":
         help="Boundary condition type",
     )
     # mesh parameters
-    parser.add_argument(
-        "--mesh", choices=["disk", "square"], default="disk", help="Mesh shape"
-    )
+    parser.add_argument("--mesh", choices=["disk", "square"], default="disk", help="Mesh shape")
     parser.add_argument("--h", type=float, required=True, help="Mesh size parameter")
     parser.add_argument("--R", type=float, default=1.0, help="Radius for disk mesh")
     parser.add_argument(

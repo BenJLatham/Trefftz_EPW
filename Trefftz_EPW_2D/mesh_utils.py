@@ -163,9 +163,7 @@ def merge_duplicate_lines(lines, triangles, points):
         else:
             line_dict[key] = list(norm_line)
         # check inside flag via stepping
-        mid = np.array(
-            [(norm_line[0] + norm_line[2]) / 2, (norm_line[1] + norm_line[3]) / 2]
-        )
+        mid = np.array([(norm_line[0] + norm_line[2]) / 2, (norm_line[1] + norm_line[3]) / 2])
         jac, nx, ny = normal_jacobian(norm_line)
         step_point = mid + step * np.array([nx, ny])
         tri_pts = points[triangles[int(line_dict[key][4])]][:, :2]

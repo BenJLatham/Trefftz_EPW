@@ -102,12 +102,8 @@ def generate_plane_waves_from_dist(R, k, N, xc=0, yc=0, troubleshoot_zeta=0, off
             return num / den
         else:
             # Full expression
-            term1 = (abs_kR) ** (2 * p) * Gamma(
-                0.5 - 2 * p, abs_kR * np.exp(np.abs(zeta))
-            )
-            term2 = (abs_kR) ** (-2 * p) * Gamma(
-                0.5 + 2 * p, abs_kR * np.exp(np.abs(zeta))
-            )
+            term1 = (abs_kR) ** (2 * p) * Gamma(0.5 - 2 * p, abs_kR * np.exp(np.abs(zeta)))
+            term2 = (abs_kR) ** (-2 * p) * Gamma(0.5 + 2 * p, abs_kR * np.exp(np.abs(zeta)))
             denom1 = (abs_kR) ** (2 * p) * Gamma(0.5 - 2 * p, abs_kR)
             denom2 = (abs_kR) ** (-2 * p) * Gamma(0.5 + 2 * p, abs_kR)
             return (term1 + term2) / (denom1 + denom2)
@@ -155,10 +151,8 @@ def generate_plane_waves_from_dist(R, k, N, xc=0, yc=0, troubleshoot_zeta=0, off
 
             def plane_wave(x, y, zeta=zeta, phi=phi):
                 return np.exp(
-                    (1j * k * np.cosh(zeta))
-                    * (np.cos(phi) * (x - xc) + np.sin(phi) * (y - yc))
-                    + (-k * np.sinh(zeta))
-                    * (-np.sin(phi) * (x - xc) + np.cos(phi) * (y - yc))
+                    (1j * k * np.cosh(zeta)) * (np.cos(phi) * (x - xc) + np.sin(phi) * (y - yc))
+                    + (-k * np.sinh(zeta)) * (-np.sin(phi) * (x - xc) + np.cos(phi) * (y - yc))
                 )
 
             def plane_wave_grad(x, y, zeta=zeta, phi=phi):
@@ -167,8 +161,7 @@ def generate_plane_waves_from_dist(R, k, N, xc=0, yc=0, troubleshoot_zeta=0, off
                     [
                         (1j * k * np.cosh(zeta)) * np.cos(phi)
                         + (-k * np.sinh(zeta)) * -np.sin(phi),
-                        (1j * k * np.cosh(zeta)) * np.sin(phi)
-                        + (-k * np.sinh(zeta)) * np.cos(phi),
+                        (1j * k * np.cosh(zeta)) * np.sin(phi) + (-k * np.sinh(zeta)) * np.cos(phi),
                     ]
                 )
                 return val[..., np.newaxis] * grad
@@ -184,9 +177,7 @@ def generate_plane_waves_from_dist(R, k, N, xc=0, yc=0, troubleshoot_zeta=0, off
 
 
 @memory.cache
-def build_pw_params(
-    cx: float, cy: float, P_elem: int, eps_val: float, zmode: int, k: float
-):
+def build_pw_params(cx: float, cy: float, P_elem: int, eps_val: float, zmode: int, k: float):
     """
     Cached generation of plane-wave direction (theta)
     and decay (zeta) lists.
