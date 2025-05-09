@@ -4,21 +4,24 @@ meshing.py
 Mesh generation routines using Gmsh and mesh caching.
 """
 
-import gmsh
+try:
+    import gmsh
+except Exception:
+    gmsh = None
+
+import meshio
+import os
+import numpy as np
 
 __all__ = ["generate_disk_mesh", "generate_square_mesh"]
 
 
-def generate_disk_mesh(h=0.1, R=1.5, filename=None):
-    """
-    Generate a 2D disk mesh with inner radius 1 and outer radius R using mesh size h.
-    Writes to 'disk.msh' or the provided filename.
-
-    Parameters:
-      h        : float – target mesh size.
-      R        : float – outer radius.
-      filename : str or None – if given, rename 'disk.msh' to this filename.
-    """
+def generate_disk_mesh(h, R, meshname="disk"):
+    if gmsh is None:
+        raise RuntimeError(
+            "gmsh is not available—cannot generate meshes. "
+            "Please install the gmsh Python package and ensure libGLU is present."
+        )
     gmsh.initialize()
     gmsh.model.add("Disk")
     # Define points
