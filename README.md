@@ -1,7 +1,6 @@
-
 # Trefftz-EPW-2D
 
-[![CI](https://github.com/YourUserName/Trefftz_EPW/actions/workflows/ci.yml/badge.svg)](https://github.com/YourUserName/Trefftz_EPW/actions)  
+[![CI](https://github.com/BenJLatham/Trefftz_EPW/actions/workflows/ci.yml/badge.svg)](https://github.com/BenJLatham/Trefftz_EPW/actions)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15368677.svg)](https://doi.org/10.5281/zenodo.15368677)
 
 ## Overview
@@ -16,44 +15,49 @@
 
 ## Features
 
-- **Modular design**: core solver class plus dedicated modules for numerics, meshing, assembly, and solving.  
-- **No PyPI needed**: simply clone or download a snapshot (see Zenodo DOI) and run.  
+- **Modular design**: core solver class plus dedicated modules for numerics, meshing, assembly, and solving.   
 - **Automated testing & CI**: pytest suite, Black formatting, flake8 linting.
 
 ## Installation
 
-You can download a fixed archived snapshot with DOI 10.5281/zenodo.15368677 from Zenodo:
+### Download a fixed snapshot (with DOI)
 
+```bash
 wget https://zenodo.org/record/15368677/files/Trefftz-EPW-2D.zip
 unzip Trefftz-EPW-2D.zip
 cd Trefftz-EPW-2D
+````
 
-
-Or clone the GitHub repository:
+### Or clone the GitHub repository
 
 ```bash
-git clone https://github.com/YourUserName/Trefftz_EPW.git
+git clone https://github.com/BenJLatham/Trefftz_EPW.git
 cd Trefftz_EPW
+```
 
-Then install in editable mode so you can edit and rerun:
+### Install in editable mode
 
+```bash
 pip install -e .
+```
 
-(Requires Python ≥3.8, plus dependencies: numpy, scipy, meshio, gmsh, pypardiso, joblib.)
+> **Requires** Python ≥ 3.8 and the dependencies:
+> `numpy`, `scipy`, `meshio`, `gmsh`, `pypardiso`, `joblib`
 
-Quickstart
+## Quickstart
 
+```python
 import numpy as np
 from Trefftz_EPW_2D import Trefftz2d
 
 solver = Trefftz2d(
     k=5.0,
     epsilon=-2.0,
-    order=9,
+    order=96,
     zeta_distribution="Parolin",
-    alpha=lambda x,y:0.5,
-    beta=lambda x,y:0.5,
-    delta=lambda x,y:0.5,
+    alpha=lambda x, y: 10**6,
+    beta=lambda x, y: 10**6,
+    delta=lambda x, y: 10**6,
     bc="robin"
 )
 
@@ -63,10 +67,11 @@ solver.assemble()
 u = solver.solve(use_pardiso=False, alpha=None)
 
 print("‖u‖₂ =", np.linalg.norm(u))
+```
 
+## CLI Usage
 
-Or run directly from the command line:
-
+```bash
 trefftzdg \
   --k 5.0 \
   --epsilon -2.0 \
@@ -78,13 +83,21 @@ trefftzdg \
   --use-pardiso \
   --alpha 1e-6 \
   --output solution.npz
+```
 
+Run `trefftzdg --help` for full options.
 
-Testing
+## Testing
+
+```bash
 pytest -q
+```
 
-If you use Trefftz-EPW-2D in your research, please cite:
+## Citation
 
+Please cite this software in your research:
+
+```bibtex
 @software{trefftzh-epw-2d_2025,
   author       = {Benjamin J. Latham},
   title        = {Trefftz-EPW-2D: Plane-wave DG solver for 2D disk scattering},
@@ -92,5 +105,11 @@ If you use Trefftz-EPW-2D in your research, please cite:
   url          = {https://doi.org/10.5281/zenodo.15368677},
   year         = {2025},
 }
+```
 
+## License
 
+This project is released under the **MIT License**. See [LICENSE](LICENSE) for details.
+
+```
+```
