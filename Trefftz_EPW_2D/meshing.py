@@ -8,19 +8,15 @@ try:
     import gmsh
 except Exception:
     gmsh = None
-
-import meshio
-import os
-import numpy as np
-
 __all__ = ["generate_disk_mesh", "generate_square_mesh"]
 
 
-def generate_disk_mesh(h, R, meshname="disk"):
+def generate_disk_mesh(h, R, filename="disk_mesh.msh"):
     if gmsh is None:
         raise RuntimeError(
             "gmsh is not available—cannot generate meshes. "
-            "Please install the gmsh Python package and ensure libGLU is present."
+            "Please install the gmsh Python package"
+            " and ensure libGLU is present."
         )
     gmsh.initialize()
     gmsh.model.add("Disk")
