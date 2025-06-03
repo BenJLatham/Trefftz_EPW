@@ -3,7 +3,7 @@
 [![CI](https://github.com/BenJLatham/Trefftz_EPW/actions/workflows/ci.yml/badge.svg)](https://github.com/BenJLatham/Trefftz_EPW/actions)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15368677.svg)](https://doi.org/10.5281/zenodo.15368677)
 
-We acknowledge support from NSF Grant DMS-2009366
+We acknowledge support from NSF Grant DMS-2009366.
 ## Overview
 
 **Trefftz-EPW-2D** is a Python package implementing a 2D plane-wave discontinuous Galerkin (Trefftz) solver for scattering by a circular inclusion with sign-changing permittivity. It supports:
